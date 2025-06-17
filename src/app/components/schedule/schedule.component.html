@@ -1,0 +1,32 @@
+<div *ngIf="isLoading" class="schedule-grid">{{status}}</div>
+<div *ngIf="!isLoading" class="schedule-grid">
+  <ng-container *ngFor="let week of schedule">
+    <div class="schedule-row">
+      <div
+        class="schedule-cell"
+        *ngFor="let day of week"
+        (click)="onSelectDay(day)"
+        [ngClass]="{
+        'selected-day': isSameDate(selectedDay, day),
+        'available-day': isFuture(day) && isAvailable(day),
+        'busy-day': isBusy(day),
+        'allowed-day': isFuture(day),
+        }"
+      >
+        <div class="date">{{ day | date: 'dd' : undefined : 'uk' }}</div>
+        <div class="month">{{ day | date: 'MMMM' : undefined : 'uk' }}</div>
+      </div>
+    </div>
+    <ng-container *ngIf="showDaySchedule && isDayInWeek(week, selectedDay)">
+      <div class="schedule-week-details">
+        <app-day-schedule
+          [day]="formatDate(selectedDay)"
+          [doctorId]="doctorId"
+          (deletedAppointment)="removeAppointment($event)"
+        ></app-day-schedule>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+

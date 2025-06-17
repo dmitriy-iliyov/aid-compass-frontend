@@ -1,0 +1,58 @@
+<div *ngIf="isLoading">{{isLoading}}</div>
+<div *ngIf="!isLoading" class="appointment-card-info-wrapper">
+    <div>
+      <img [src]="user?.avatar_url" alt="avatar" class="profile-card-img" />
+    </div>
+    <div class="profile-card-middle">
+      <h2>{{ user?.customer_profile?.last_name }} {{ user?.customer_profile?.first_name }} {{ user?.customer_profile?.second_name }}</h2>
+      <div class="subtitle">{{ user?.customer_profile?.birthday_date }} {{user?.customer_profile?.gender}}</div>
+    </div>
+    <div class="profile-card-right">
+      <div class="subtitle2">
+        {{ getPrimaryContact(user?.contacts, 'PHONE_NUMBER') }}
+      </div>
+      <div class="subtitle">
+        {{ getPrimaryContact(user?.contacts, 'EMAIL') }}
+      </div>
+      <div class="button-wrapper"><div class="button-dark2" (click)="goToEdit(userId)" >&nbsp;Змінити&nbsp;</div></div>
+    </div>
+</div>
+
+<div class="filter-buttons">
+  <div class="filter-label">Записи</div>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'all'"
+    (click)="setFilter('all')">
+    Всі
+  </button>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'scheduled'"
+    (click)="setFilter('scheduled')">
+    Заплановані
+  </button>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'complete'"
+    (click)="setFilter('complete')">
+    Завершені
+  </button>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'canceled'"
+    (click)="setFilter('canceled')">
+    Скасовані
+  </button>
+</div>
+
+<div *ngIf="isError">{{isError}}</div>
+<div class="appointment-card-wrapper" [class.empty]="appointments.length === 0" *ngIf="!isLoading && !isError">
+  <div *ngFor="let appointment of appointments;">
+    <app-user-appointment-card
+      [appointment]="appointment"
+      (deleted)="removeAppointment($event)">
+    </app-user-appointment-card>
+  </div>
+  <app-pages *ngIf="pageCount" [pageCount]="pageCount"   [currentPage]="currentPage" (pageClick)="onPageClick($event)"></app-pages >
+</div>

@@ -1,0 +1,119 @@
+.wrapper {
+  padding: 10px;
+}
+.appointment-card-info-wrapper {
+  border: 1px solid var(--font-color);
+  background-color: var(--block-color);
+  border-radius: 2px;
+  color: var(--white-color);
+
+  display: flex;
+  align-items: stretch;
+  gap: 80px;
+
+  min-height: auto;
+  height: 100%;
+  padding: 24px 24px 24px 10px;
+
+}
+h2 {
+  margin-top: 0;
+}
+.profile-card-img {
+  flex: 0 0 200px;
+}
+.profile-card-img img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile-card-name {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 18px;
+
+  text-align: left;
+}
+.profile-card-contact {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 300px;
+  gap: 20px;
+  justify-content: space-between;
+
+  text-align: right;
+  margin-left: auto;
+  padding: 10px 0;
+}
+
+.profile-card-contact-top {
+  display: flex;
+  flex-direction: column;
+}
+.profile-card-contact-bottom{
+  display: flex;
+  flex-direction: column;
+}
+.button-wrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 20px;
+}
+.button-dark2 {
+  width: auto;
+  display: inline-block;
+  align-self: flex-end;
+}
+.schedule-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+
+.filter-buttons {
+  display: flex;
+  align-items: center;
+}
+.filter-label {
+  font-weight: 900;
+  font-size: 18px;
+  margin: 0 8px 0px;
+  align-items: flex-end;
+}
+.tab {
+  border-radius: 2px;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+.tab.active {
+  background-color: var(--block-color);
+  color: var(--white-color);
+}
+
+
+.appointment-card-wrapper {
+}
+.appointment-card-wrapper.empty {
+  border-top: 1px solid var(--font-color);
+}
+.warning {
+  background-color: var(--warning-color);
+  color: darkred;
+  text-align: center;
+  border:0;
+  padding: 10px;
+  margin-bottom: -2px;
+}
+
+
+
+
+
+

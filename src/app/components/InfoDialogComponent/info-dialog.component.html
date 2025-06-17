@@ -1,0 +1,11 @@
+<div class="dialog-content-centered">
+  <h2>{{ data.title || 'Інформація' }}</h2>
+
+  <div>
+    {{ data.message || 'Повідомлення' }}
+  </div>
+
+  <div class="button-wrapper">
+    <button class="button-dark" (click)="onClose()">Скасувати</button>
+  </div>
+</div>

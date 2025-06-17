@@ -1,0 +1,70 @@
+.profile-card {
+  border: 1px solid var(--font-color);
+  display: flex;
+  gap: 32px;
+  padding: 0 0 24px 24px;
+  align-items: stretch;
+}
+.profile-card-info2{
+  padding-bottom: 24px;
+}
+
+.profile-card-booking {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+}
+.profile-card-booking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: flex-end;
+  text-align: right;
+  margin-right: 24px;
+}
+
+
+.profile-card-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: auto;
+  margin-bottom: -10px;
+  text-align: right;
+
+
+}
+
+
+.profile-card-info2 {
+  flex: 3 1 auto;
+  display: flex;
+}
+
+
+.profile-card-info {
+  flex: 3 1 auto;
+  display: flex;
+  gap: 32px;
+  padding: 32px 0 0 10px;
+}
+.profile-card-name {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+}
+.profile-card-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+
+
+
+
+

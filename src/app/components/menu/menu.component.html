@@ -1,0 +1,20 @@
+<div class="menu-wrapper">
+  <img src="/assets/images/logo.png" alt="logo"/>
+  <div class="main-menu">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Головна</a>
+    <a routerLink="/doctors" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Лікарі</a>
+    <a routerLink="/jurists" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Юристи</a>
+    <a *ngIf="roleService.isVolunteer()" routerLink="/volunteer-account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Кабінет волонтера</a>
+    <a *ngIf="roleService.isCustomer()" routerLink="/user-account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Кабінет користувача</a>
+    <a *ngIf="roleService.isAdmin()" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Кабінет адміністратора</a>
+
+    <a *ngIf="roleService.isNoUser()" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Логін</a>
+    <a *ngIf="roleService.isUser()" routerLink="/role-selection" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Продовжіті реєстрацію</a>
+    <a *ngIf="!roleService.isNoUser()" (click)="logout()">Вийти</a>
+
+<!--    <a routerLink="/registration" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Зарееструватися</a>-->
+<!--    <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Увійти</a>-->
+    <!--    <a routerLink="/role-based-registration" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Регистрация 2</a>-->
+  </div>
+</div>
+

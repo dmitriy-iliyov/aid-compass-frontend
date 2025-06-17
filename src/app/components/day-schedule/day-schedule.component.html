@@ -1,0 +1,39 @@
+<div *ngIf="isLoading" class="time-wrapper">
+  <h3>{{ status }}</h3>
+  <div class="time-grid">
+    <div class="time-cell" style="border:0">&nbsp;</div>
+  </div>
+</div>
+
+<div  *ngIf="!isLoading && (isNoUser() || isUser())" class="time-wrapper">
+  <h3>{{title}}</h3>
+  <div class="time-grid">
+    <div class="time-cell" *ngFor="let tm of availableTimes" (click)="onSelectTimeNoUser()">{{ tm }}</div>
+  </div>
+</div>
+<div  *ngIf="!isLoading && isCustomer()" class="time-wrapper">
+  <h3>{{title}}</h3>
+  <div class="time-grid">
+    <div class="time-cell" *ngFor="let tm of availableTimes" (click)="onSelectTime(day, tm)">{{ tm }}</div>
+  </div>
+</div>
+<div  *ngIf="!isLoading && isAdmin()" class="time-wrapper">
+  <h3>{{title}}</h3>
+  <div class="time-grid">
+    <div class="time-cell cursor-default" *ngFor="let tm of availableTimes" >{{ tm }}</div>
+  </div>
+</div>
+<div  *ngIf="!isLoading && isVolunteer()" class="time-wrapper">
+  <h3>{{title}}</h3>
+  <div class="time-grid">
+    <div class="time-cell" *ngFor="let tm of allTimes"
+         (click)="onSelectTimeVolunteer(day, tm, getAppId(tm), $event.target)"
+           [ngClass]="{
+        'selected-tm': isSameTm(selectedTm, tm),
+        'available-tm': isAvailable(tm),
+        'busy-tm': isBusy(tm),
+        'allowed-tm': isVolunteer(),
+           }">{{ tm }}</div>
+  </div>
+</div>
+

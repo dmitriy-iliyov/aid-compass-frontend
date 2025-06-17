@@ -1,0 +1,141 @@
+<h2>Ви записуєтесь</h2>
+<div *ngIf="isLoading">{{ status }}</div>
+
+<div *ngIf="!isLoading" class="appointment">
+
+  <div class="appointment-left">
+    <div>
+      <div class="subtitle" *ngIf="!doctor.doctor_profile.doctor.type">{{getVolunteerTitle()}}</div>
+      <div class="subtitle2" *ngIf="doctor.doctor_profile.doctor.type">{{ doctor.doctor_profile.doctor.type }}</div>
+
+      <div class="appointment-h2">{{ doctor.doctor_profile.doctor.last_name }}
+        {{ doctor.doctor_profile.doctor.first_name }} {{ doctor.doctor_profile.doctor.second_name }}
+        <br><span class="subtitle">({{ doctor.doctor_profile.doctor.gender }})</span></div>
+    </div>
+
+    <div>
+
+      <div class="subtitle">Спеціалізація</div>
+      <div class="strong" *ngFor="let s of doctor?.doctor_profile?.doctor?.specializations;">{{ s }}</div>
+    </div>
+
+
+
+
+
+  </div>
+  <div class="appointment-right">
+    <div>
+      <div class="subtitle">Дата та час</div>
+      <div class="strong">{{ getDateObj() | date: 'EEEE, dd MMMM, HH:mm' : undefined : 'uk' }}</div>
+    </div>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
+
+      <div class="radio-group">
+        <label class="radio-button">
+          <input type="radio" name="appointment" [(ngModel)]="formData.appointment" value="OFFLINE" required />
+          <span>Очний&nbsp;прийом</span>
+        </label>
+        <label class="radio-button">
+          <input type="radio" name="appointment" [(ngModel)]="formData.appointment" value="ONLINE" required />
+          <span>Онлайн&nbsp;консультація</span>
+        </label>
+      </div>
+      <div class="error" *ngIf="submitted && form.controls['appointment']?.invalid">
+        Введіть тип консультаціі
+      </div>
+      <div class="error" *ngIf="errorMessages['appointment']">
+        {{ errorMessages['appointment'] }}
+      </div>
+
+
+      <div class="floating-label">
+        <div>Короткий опис проблеми</div>
+        <textarea class="custom-textarea" name="specialization_detail"
+                  [(ngModel)]="formData.description" required placeholder=" "></textarea>
+        <div class="error" *ngIf="submitted && form.controls['specialization_detail']?.invalid">
+          Введіть короткий опис проблеми
+        </div>
+        <div class="error" *ngIf="errorMessages['specialization_detail']">
+          {{ errorMessages['specialization_detail'] }}
+        </div>
+      </div>
+
+
+      <button type="submit" class="button-dark">Записатись</button>
+    </form>
+  </div>
+</div>
+
+
+<!--      -->
+<!--      <div class="floating-label">-->
+<!--        <input name="lastName" [(ngModel)]="formData.lastName" required placeholder=" ">-->
+<!--        <label>Прізвище</label>-->
+<!--        <div class="error" *ngIf="submitted && form.controls['lastName']?.invalid">-->
+<!--          Введіть прізвище-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="floating-label">-->
+<!--        <input name="firstName" [(ngModel)]="formData.firstName" required placeholder=" ">-->
+<!--        <label>Ім'я</label>-->
+<!--        <div class="error" *ngIf="submitted && form.controls['firstName']?.invalid">-->
+<!--          Введіть ім'я-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="floating-label">-->
+<!--        <input name="phone" type="tel" [(ngModel)]="formData.phone" required pattern="^[0-9\-\+]{9,15}$" placeholder=" ">-->
+<!--        <label>Телефон</label>-->
+<!--        <div class="error" *ngIf="submitted && form.controls['phone']?.invalid">-->
+<!--          Введіть коректний номер телефона-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="floating-label">-->
+<!--        <input name="email" type="email" [(ngModel)]="formData.email" required placeholder=" ">-->
+<!--        <label>Email</label>-->
+<!--        <div class="error" *ngIf="submitted && form.controls['email']?.invalid">-->
+<!--          Введіть коректный email-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Дата рождения &ndash;&gt;-->
+<!--      <div class="floating-label">-->
+<!--        <input name="birthDate" type="date" [(ngModel)]="formData.birthDate" required placeholder=" ">-->
+<!--        <label>Дата народження</label>-->
+<!--        <div class="error" *ngIf="submitted && form.controls['birthDate']?.invalid">-->
+<!--          Введіть дату народження-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="radio-group" style="align-items: center">-->
+<!--        <div class="subtitle">Стать</div>-->
+<!--        <label class="radio-button">-->
+<!--          <input type="radio" name="gender" [(ngModel)]="formData.gender" value="male" required />-->
+<!--          <span>Чоловічий</span>-->
+<!--        </label>-->
+<!--        <label class="radio-button">-->
+<!--          <input type="radio" name="gender" [(ngModel)]="formData.gender" value="female" required />-->
+<!--          <span>Жіночий</span>-->
+<!--        </label>-->
+<!--      </div>-->
+<!--      <div class="error" *ngIf="submitted && form.controls['gender']?.invalid">-->
+<!--        Введіть стать-->
+<!--      </div>-->
+
+
+
+<!--      <pre>{{ form.value | json }}</pre>-->
+
+
+
+
+
+
+
+
+
+

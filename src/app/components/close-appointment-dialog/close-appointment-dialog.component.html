@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <h2>Завершення запису</h2>
+  <div class="appointment-card">
+    <div class="appointment-card-left">
+      <div class="subtitle2">{{ appointment.appointment.type }}</div>
+      <div class="subtitle">{{ appointment.appointment.date }} {{ appointment.appointment.start }}</div>
+    </div>
+    <div class="appointment-card-middle">
+      <div class="appointment-card-row"><div>{{ appointment.customer.last_name }}</div><div>{{ appointment.customer.first_name }}</div><div class="subtitle">({{ appointment.customer.birthday_date }} {{ appointment.customer.gender }})</div></div>
+      <div class="appointment-card-row subtitle2">{{ appointment.appointment.description }}</div>
+    </div>
+  </div>
+
+  <form #closeForm="ngForm" (ngSubmit)="submitCloseForm(closeForm)" novalidate>
+  <div class="floating-label">
+    <textarea class="custom-textarea" name="reason"
+              [(ngModel)]="formData.reason" required placeholder=" "></textarea>
+    <div class="error" *ngIf="submittedCloseForm && closeForm.controls['reason']?.invalid">
+      Введіть опис завершення запису
+    </div>
+    <div class="error" *ngIf="closeErrorMessages['reason']">
+      {{ closeErrorMessages['reason'] }}
+    </div>
+  </div>
+  <div class="button-row">
+    <button type="submit" class="button-light">Зберегти та завершити запис</button>
+    <button class="button-light" (click)="onCancel()">Закрити</button>
+  </div>
+  </form>
+</div>

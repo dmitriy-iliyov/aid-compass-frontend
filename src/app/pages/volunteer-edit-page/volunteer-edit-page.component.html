@@ -1,0 +1,255 @@
+<div *ngIf="isLoading">{{ status }}</div>
+
+<div *ngIf="!isLoading" class="volunteer-edit-wrapper">
+  <h2>{{title}}</h2>
+
+  <div class="columns-container">
+    <div class="left-column">
+      <form *ngIf="roleService.isVolunteer()" #avatarForm="ngForm" (ngSubmit)="submitAvatar()"  class="avatar-form">
+          <div class="avatar-upload">
+            <img *ngIf="avatarPreview" [src]="avatarPreview" alt="Avatar Preview" class="profile-card-img"/>
+            <label for="avatar" class="button-light avatar-change-button">Змінити аватар</label>
+            <input
+              type="file"
+              id="avatar"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              hidden
+            />
+            <div class="error" *ngIf="afErrorMessages">
+            {{afErrorMessages}}
+          </div>
+          </div>
+      </form>
+
+      <form *ngIf="roleService.isVolunteer()" #contactForm="ngForm" (ngSubmit)="submitContactForm(contactForm)" novalidate>
+        <h2>Контактна інформація</h2>
+
+        <div class="floating-label">
+          <input name="contact" type="tel" [(ngModel)]="formData.contact" required pattern="^\+[0-9]{12}$" placeholder=" ">
+          <label>Телефон</label>
+          <div class="error" *ngIf="submittedContact && contactForm.controls['contact']?.invalid">
+            Введіть коректний номер телефона
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="cfErrorMessages['contact']">
+            {{ cfErrorMessages['contact'] }}
+          </div>
+        </div>
+        <div>
+          <div class="strong">Email</div>
+          <div>{{ formData.email  }}</div>
+        </div>
+
+
+<!--        <div class="floating-label">-->
+<!--          <input name="email" type="email" [(ngModel)]="formData.email" required placeholder=" ">-->
+<!--          <label>Email</label>-->
+<!--          <div class="error" *ngIf="submittedContact && contactForm.controls['email']?.invalid">-->
+<!--            Введіть коректный email-->
+<!--          </div>-->
+<!--          &lt;!&ndash; Помилка від сервера &ndash;&gt;-->
+<!--          <div class="error" *ngIf="cfErrorMessages['email']">-->
+<!--            {{ cfErrorMessages['email'] }}-->
+<!--          </div>-->
+<!--        </div>-->
+
+        <button type="submit" class="button-dark">Зберегти контакти</button>
+      </form>
+
+      <div *ngIf="roleService.isUser()" class="email">
+        <h3>Контактна інформація</h3>
+        <div class="strong">Email</div>
+        <div>{{ formData.email  }}</div>
+      </div>
+
+    </div>
+
+    <div class="right-column">
+      <form #personalForm="ngForm" (ngSubmit)="submitPersonalForm(personalForm)" novalidate>
+        <h2>Персональні дані</h2>
+
+        <div class="floating-label">
+          <input name="lastName" [(ngModel)]="formData.lastName" required placeholder=" ">
+          <label>Прізвище</label>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['lastName']?.invalid">
+            Введіть прізвище
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['lastName']">
+            {{ pfErrorMessages['lastName'] }}
+          </div>
+        </div>
+
+
+        <div class="floating-label">
+          <input name="firstName" [(ngModel)]="formData.firstName" required placeholder=" ">
+          <label>Ім'я</label>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['firstName']?.invalid">
+            Введіть ім'я
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['firstName']">
+            {{ pfErrorMessages['firstName'] }}
+          </div>
+        </div>
+
+
+        <div class="floating-label">
+          <input name="secondName" [(ngModel)]="formData.secondName" required placeholder=" ">
+          <label>По батькові</label>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['secondName']?.invalid">
+            Введіть по батькові
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['secondName']">
+            {{ pfErrorMessages['secondName'] }}
+          </div>
+        </div>
+
+
+        <div class="radio-group">
+          <div class="subtitle">Стать</div>
+          <label class="radio-button">
+            <input type="radio" name="GENDER" [(ngModel)]="formData.GENDER" value="Чоловік" required />
+            <span>Чоловічий</span>
+          </label>
+          <label class="radio-button">
+            <input type="radio" name="GENDER" [(ngModel)]="formData.GENDER" value="Жінка" required />
+            <span>Жіночий</span>
+          </label>
+        </div>
+        <div class="error" *ngIf="submittedPersonal && personalForm.controls['GENDER']?.invalid">
+          Введіть стать
+        </div>
+        <div class="error" *ngIf="pfErrorMessages['GENDER']">
+          {{ pfErrorMessages['GENDER'] }}
+        </div>
+
+        <div class="floating-label">
+          <select class="custom-select" name="type" [(ngModel)]="formData.type" required placeholder=" ">
+            <option value="" disabled selected>Оберіть юридичний статус</option>
+            <option *ngFor="let tp of this.typesList" [value]="tp">{{ tp }}</option>
+          </select>
+          <label>Юридичний статус</label>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['type']?.invalid">
+            Введіть юридичний статус
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['type']">
+            {{ pfErrorMessages['type'] }}
+          </div>
+          <div class="error" *ngIf="pfErrorMessages['type[]']">
+            {{ pfErrorMessages['type[]'] }}
+          </div>
+        </div>
+
+        <div class="floating-label">
+          <select class="custom-select" name="specializations" [(ngModel)]="formData.specializations" required placeholder=" ">
+            <option value="100" disabled selected>Оберіть спеціалізацію</option>
+            <option *ngFor="let spec of this.specializationsList" [value]="spec">{{ spec }}</option>
+          </select>
+          <label>Спеціалізація</label>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['specializations']?.invalid">
+            Введіть спеціалізацію
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['specializations']">
+            {{ pfErrorMessages['specializations'] }}
+          </div>
+          <div class="error" *ngIf="pfErrorMessages['specializations[]']">
+            {{ pfErrorMessages['specializations[]'] }}
+          </div>
+        </div>
+
+        <div class="floating-label">
+          <input name="experience" [(ngModel)]="formData.experience" required placeholder=" ">
+          <label>Стаж</label>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['experience']?.invalid">
+            Введіть стаж
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['experience']">
+            {{ pfErrorMessages['experience'] }}
+          </div>
+        </div>
+
+        <div class="floating-label">
+          <div>Спеціалізація</div>
+          <textarea class="custom-textarea" name="specialization_detail"
+                    [(ngModel)]="formData.specialization_detail" required placeholder=" "></textarea>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['specialization_detail']?.invalid">
+            Введіть спеціалізацію
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['specialization_detail']">
+            {{ pfErrorMessages['specialization_detail'] }}
+          </div>
+        </div>
+
+        <div class="radio-group">
+          <div class="subtitle">Тривалість прийому</div>
+          <label class="radio-button">
+            <input type="radio" name="appointmentDuration" [(ngModel)]="formData.appointmentDuration" value="15" required />
+            <span>15 хв</span>
+          </label>
+          <label class="radio-button">
+            <input type="radio" name="appointmentDuration" [(ngModel)]="formData.appointmentDuration" value="30" required />
+            <span>30 хв</span>
+          </label>
+          <label class="radio-button">
+            <input type="radio" name="appointmentDuration" [(ngModel)]="formData.appointmentDuration" value="45" required />
+            <span>45 хв</span>
+          </label>
+          <label class="radio-button">
+            <input type="radio" name="appointmentDuration" [(ngModel)]="formData.appointmentDuration" value="60" required />
+            <span>60 хв</span>
+          </label>
+        </div>
+        <div class="error" *ngIf="submittedPersonal && personalForm.controls['appointmentDuration']?.invalid">
+          Виберіть тривалість прийому
+        </div>
+        <div class="error" *ngIf="pfErrorMessages['appointmentDuration']">
+          {{ pfErrorMessages['appointmentDuration'] }}
+        </div>
+
+
+        <button type="submit" class="button-dark">Зберегти особисті дані</button>
+      </form>
+
+      <form *ngIf="roleService.isVolunteer()" #additionalForm="ngForm" (ngSubmit)="submitAdditionalForm(personalForm)" novalidate>
+        <h2>Додаткові дані</h2>
+
+        <div class="floating-label">
+          <div>Про себе</div>
+          <textarea class="custom-textarea" name="about_myself"
+                    [(ngModel)]="formData.about_myself" required placeholder=" "></textarea>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['about_myself']?.invalid">
+            Заповніть поле Про себе
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['about_myself']">
+            {{ pfErrorMessages['about_myself'] }}
+          </div>
+        </div>
+
+        <div class="floating-label">
+          <div>Адреса проведення OFFLINE консультацій</div>
+          <textarea class="custom-textarea" name="address"
+                    [(ngModel)]="formData.address" required placeholder=" "></textarea>
+          <div class="error" *ngIf="submittedPersonal && personalForm.controls['address']?.invalid">
+            Заповніть адресу
+          </div>
+          <!-- Помилка від сервера -->
+          <div class="error" *ngIf="pfErrorMessages['address']">
+            {{ pfErrorMessages['address'] }}
+          </div>
+        </div>
+
+
+        <button type="submit" class="button-dark">Зберегти особисті дані</button>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,47 @@
+<div class="wrapper">
+    <div *ngIf="!isLoading" class="appointment-card-info-wrapper">
+        <div *ngIf="doctor?.doctor_profile" class="profile-card-img">
+            <img [src]="doctor.avatar_url" alt="avatar" />
+        </div>
+        <div class="profile-card-name">
+            <div class="h2"> {{ doctor.doctor_profile.doctor.last_name }} {{ doctor.doctor_profile.doctor.first_name }} {{ doctor.doctor_profile.doctor.second_name }} <span class="subtitle">({{ doctor.doctor_profile.doctor.gender }})</span></div>
+            <div>
+                <div class="subtitle2" *ngIf="doctor?.doctor_profile?.doctor?.type">{{ doctor.doctor_profile.doctor.type }}</div>
+                <div class="subtitle" *ngFor="let s of doctor?.doctor_profile?.doctor?.specializations;">{{ s }}</div>
+            </div>
+            <div><div class="subtitle">Стаж</div>
+                <strong class="strong">{{ getExperience() | yearsUkr }}</strong>
+            </div>
+            <div>
+                <div class="subtitle">Спеціалізація</div>
+                <div>{{ doctor.doctor_profile.doctor.specialization_detail }}</div>
+            </div>
+            <div>
+                <div class="subtitle">Про себе</div>
+                <div>{{ doctor.doctor_profile.detail.about_myself }}</div>
+            </div>
+        </div>
+        <div class="profile-card-contact">
+            <div class="profile-card-contact-top">
+                <div class="subtitle" >Тривалість прийому {{ doctor.appointment_duration }} хв</div>
+            </div>
+            <div>
+              <div class="subtitle2">Адреса</div>
+              <div class="subtitle" > {{ doctor.doctor_profile.detail.address }} хв</div>
+             </div>
+             <div class="profile-card-contact-bottom">
+<!--                 <div class="subtitle2">{{ getPrivateContact(doctor.contacts, 'PHONE_NUMBER') }}</div>-->
+                 <div class="subtitle">{{ getPrimaryContact(doctor.contacts, 'EMAIL') }}</div>
+                 <div *ngIf="false && !isVolunteer()" class="button-wrapper">
+                     <div class="button-dark2" (click)="goToSchedule()">Розклад</div>
+                 </div>
+             </div>
+         </div>
+    </div>
+    <div class="schedule-wrapper" *ngIf="showSchedule">
+        <app-schedule [doctorId]="doctor.doctor_profile.doctor.id"></app-schedule>
+    </div>
+    <div *ngIf="isLoading">{{ status }}</div>
+</div>
+
+

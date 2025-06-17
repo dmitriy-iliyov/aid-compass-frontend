@@ -1,0 +1,48 @@
+<div class="profile-card">
+  <div class="profile-card-info2">
+    <div class="profile-card-info">
+      <div class="">
+        <img [src]="doctor?.avatar_url" alt="avatar" class="profile-card-img" />
+      </div>
+      <div class="profile-card-name">
+        <div class="h2"> {{ doctor?.doctor?.last_name }} {{ doctor?.doctor?.first_name }} {{ doctor?.doctor?.second_name }} <span class="subtitle">({{ doctor?.doctor?.gender }})</span></div>
+        <div class="subtitle2" *ngIf="doctor?.doctor?.type">{{ doctor?.doctor?.type }}</div>
+
+        <div>
+          <div class="subtitle" *ngFor="let s of doctor?.doctor?.specializations;">{{ s }}</div>
+        </div>
+        <div>
+          <div class="subtitle">Стаж</div>
+          <strong class="strong">{{ getExperience() | yearsUkr }}</strong>
+        </div>
+        <div>
+          <div class="subtitle">Деталі спеціалізації</div>
+          <div>{{ doctor?.doctor?.specialization_detail }}</div>
+        </div>
+      </div>
+    </div>  </div>
+
+  <div class="profile-card-booking">
+    <div class="profile-card-booking-info">
+      <div class="subtitle" *ngIf="doctor && doctor.nearest_interval">Найближчий вільний час</div>
+      <div class="strong" *ngIf="doctor && doctor.nearest_interval">{{ formatDateTime(doctor.nearest_interval.date, doctor.nearest_interval.start) }}</div>
+      <div class="subtitle">Тривалість прийому {{ doctor?.appointment_duration }} хв</div>
+    </div>
+    <div class="profile-card-button-wrapper" *ngIf="!isVolunteer() && !isAdmin()">
+      <div *ngIf="doctor && doctor.nearest_interval" class="button-light" (click)="goToAppointment(doctor.doctor.id, doctor.nearest_interval.date, doctor.nearest_interval.start)">Записатися на цей час</div>
+      <div class="button-dark" (click)="onShowSchedule(doctor?.doctor?.id)">Показати розклад</div>
+      <div class="button-dark" (click)="onShowProfile(doctor?.doctor?.id)">Подивитися профіль</div>
+    </div>
+    <div class="profile-card-button-wrapper" *ngIf="isVolunteer() || isAdmin()">
+      <div class="button-dark" (click)="onShowSchedule(doctor?.doctor?.id)">Показати розклад</div>
+      <div class="button-dark" (click)="onShowProfile(doctor?.doctor?.id)">Подивитися профіль</div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+
+.profile-card-wrapper {
+  display: grid;
+  grid-gap: 8px;
+  padding-bottom: 300px;
+  transition: padding-bottom 0.3s ease;
+}
+.profile-card-wrapper.empty {
+  border-top: 1px solid var(--font-color);
+}
+.schedule-wrapper {
+  justify-content: center;
+  display: flex;
+}
+.search-wrapper {
+  display: flex;
+  gap: 26px;
+}
+.floating-label {
+  flex: 1;
+  min-width: 0;
+}
+
+select {
+  height: 40px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.tab {
+  border-radius: 2px;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.tab.active {
+  background-color: var(--block-color);
+  color: var(--white-color);
+}
+.filter-buttons {
+  display: flex;
+  align-items: center;
+}
+.filter-label {
+  font-weight: 900;
+  font-size: 18px;
+  margin: 0 8px 0px;
+  align-items: flex-end;
+}

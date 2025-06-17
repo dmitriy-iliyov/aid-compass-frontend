@@ -1,0 +1,20 @@
+<div *ngIf="isLoading">{{ isLoading }}</div>
+<div *ngIf="isError" class="error">{{ isError }}</div>
+<app-volunteers-page
+  *ngIf="!isLoading"
+  (nameChange)="onNameChange($event)"
+  (specializationChange)="onSpecializationChange($event)"
+  [volunteerType]="volunteerType"
+  [doctors]="doctors"
+  [specializationsList]="specializationsList"
+  [volunteerTitle]="volunteerTitle"
+  [pageCount]="pageCount"
+  [currentPage]="currentPage"
+  (pageClick)="onPageClick($event)"
+
+></app-volunteers-page >
+
+
+
+
+

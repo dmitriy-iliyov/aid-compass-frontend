@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="appointment-card">
+    <div class="appointment-card-left">
+      <div class="button-light">{{ appointment.appointment.type }}</div>
+      <div class="subtitle">{{ appointment.appointment.date }} {{ appointment.appointment.start }}</div>
+    </div>
+    <div class="appointment-card-middle">
+      <div class="appointment-card-row">
+        <div>{{ appointment.customer.last_name }}</div>
+        <div>{{ appointment.customer.first_name }}</div>
+        <div class="subtitle">({{ appointment.customer.birthday_date }} {{ appointment.customer.gender }})</div>
+      </div>
+      <div class="appointment-card-row subtitle2">{{ appointment.appointment.description }}</div>
+    </div>
+    <div class="appointment-card-mright">
+      <div class="subtitle2">
+        {{ getPrimaryContact(appointment.contacts, 'PHONE_NUMBER') }}
+      </div>
+      <div class="subtitle">
+        {{ getPrimaryContact(appointment.contacts, 'EMAIL') }}
+      </div>
+    </div>
+    <div class="appointment-card-right">
+      <button class="button-light" (click)="onConfirm()">Скасувати запис</button>
+    </div>
+  </div>
+  <div class="button-row">
+    <button class="button-light" (click)="onCancel()">&nbsp;Закрити&nbsp;</button>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <h2>Вхід</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="floating-label">
+        <input formControlName="email" type="email" placeholder=" " />
+        <label>Електронна пошта</label>
+
+        <!-- Клієнтська помилка -->
+        <div class="error" *ngIf="formSubmitted && loginForm.get('email')?.invalid">
+          Введіть коректний email
+        </div>
+
+        <!-- Помилка від сервера -->
+        <div class="error" *ngIf="errorMessages['email']">
+          {{ errorMessages['email'] }}
+        </div>
+      </div>
+
+      <div class="floating-label">
+        <input formControlName="password" type="password" placeholder=" " />
+        <label>Пароль</label>
+        <div class="error" *ngIf="formSubmitted && loginForm.get('password')?.invalid">
+          Введіть коректний пароль
+        </div>
+
+        <!-- Помилка від сервера -->
+        <div class="error" *ngIf="errorMessages['password']">
+          {{ errorMessages['password'] }}
+        </div>
+      </div>
+
+      <button type="submit" class="button-dark">Увійти</button>
+    <div><a href="/registration">Зареєструватись</a></div>
+    <div><a href="/recovery-password">Забули пароль?</a></div>
+
+  </form>
+</div>

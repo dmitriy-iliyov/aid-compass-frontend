@@ -1,0 +1,73 @@
+.time-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--font-color);
+}
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 8px;
+  width: fit-content;
+  //border: 1px solid var(--inactive-color);
+  margin: 0 auto;
+  padding: 15px;
+
+}
+.time-wrapper h3 {
+  text-align: center;
+  margin: 0 auto;
+}
+.time-cell {
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: var(--white-color);
+  border: 1px solid var(--inactive-color);
+  color: var(--inactive-color);
+}
+.time-cell:hover {
+  background-color: #ddd;
+}
+
+.allowed-tm:hover,
+.available-tm:hover,
+.busy-tm:hover, {
+  background-color: var(--font-color);
+  color: var(--white-color);
+}
+.allowed-tm {
+  cursor: pointer;
+}
+.available-tm {
+  color: var(--font-color);
+  border: 1px solid var(--font-color);
+  cursor: pointer;
+}
+.busy-tm {
+  color: var(--white-color);
+  border: 1px solid var(--font-color);
+  background-color: var(--block-color);
+  cursor: pointer;
+}
+.selected-tm {
+  background-color: var(--font-color);
+  color: var(--white-color);
+}
+.no-allowed-tm {
+  cursor: not-allowed;
+  background-color: var(--white-color);
+  color: var(--inactive-color) !important;
+}
+.no-allowed-tm:hover{
+  background-color: var(--white-color) !important;
+  color: var(--inactive-color) !important;
+}

@@ -1,0 +1,21 @@
+<div *ngIf="pageCount && pageCount>1" class="pages-wrapper">
+  <div>Сторінки:</div>
+  <a
+    *ngFor="let p of [].constructor(pageCount); let i = index"
+    href="#"
+    (click)="onPageClick(i); $event.preventDefault()"
+    [class.active]="isActivePage(i)"
+
+
+
+
+  >{{ i + 1 }}</a>
+
+</div>
+
+<!--[routerLink]="[]"-->
+<!--[queryParams]="{ page: i }"-->
+<!--queryParamsHandling="merge"-->
+
+<!--routerLinkActive="active"-->
+<!--[routerLinkActiveOptions]="{ exact: true }"-->

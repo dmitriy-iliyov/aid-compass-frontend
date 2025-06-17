@@ -1,0 +1,46 @@
+<div class="profile-card">
+  <div class="profile-card-info2">
+    <div class="profile-card-info">
+      <div class="">
+        <img [src]="doctor?.avatar_url" alt="avatar" class="profile-card-img" />
+      </div>
+      <div class="profile-card-name">
+        <div class="h2">
+          {{ doctor?.doctor_profile?.doctor?.last_name }}
+          {{ doctor?.doctor_profile?.doctor?.first_name }}
+          {{ doctor?.doctor_profile?.doctor?.second_name }} <span class="subtitle">(
+          {{ doctor?.doctor_profile?.doctor?.gender }})</span></div>
+        <div class="subtitle2" *ngIf="doctor?.doctor_profile?.doctor?.type">{{ doctor?.doctor_profile?.doctor?.type }}</div>
+
+        <div>
+          <div class="subtitle" *ngFor="let s of doctor?.doctor_profile?.doctor?.specializations;">{{ s }}</div>
+        </div>
+        <div>
+          <div class="subtitle">Стаж</div>
+          <strong class="strong">{{ getExperience() | yearsUkr }}</strong>
+        </div>
+        <div>
+          <div class="subtitle">Деталі спеціалізації</div>
+          <div>{{ doctor?.doctor_profile?.doctor?.specialization_detail }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-card-booking">
+    <div class="profile-card-booking-info">
+      <div class="subtitle">Тривалість прийому {{ doctor?.appointment_duration }} хв</div>
+
+
+
+    </div>
+<!--    <div class="profile-card-button-wrapper">-->
+<!--      <div class="button-dark" (click)="onShowProfile(doctor?.doctor_profile?.doctor?.id)">Подивитися профіль</div>-->
+<!--    </div>-->
+    <div class="profile-card-button-wrapper">
+      <div class="subtitle">Профіль заповнено на {{ doctor?.doctor_profile?.doctor?.profile_progress }}%</div>
+
+      <div class="button-dark" (click)="onApproved(doctor)">Підтвердити волонтера</div>
+    </div>
+  </div>
+</div>

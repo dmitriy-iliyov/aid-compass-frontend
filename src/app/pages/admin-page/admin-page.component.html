@@ -1,0 +1,40 @@
+<div *ngIf="isLoading">{{isLoading}}</div>
+<div *ngIf="isError" class="error">{{isError}}</div>
+<div *ngIf="!isLoading">
+  <div class="search-wrapper">
+    <div class="floating-label">
+          <input [(ngModel)]="selectedName" required placeholder=" " (keyup)="onNameChange()">
+          <label>Введіть прізвище лікаря</label>
+    </div>
+  </div>
+  <h2>Непідтверджені волонтеры центра</h2>
+  <div *ngIf="volunteersTypes" class="filter-buttons">
+    <button *ngFor="let tp of volunteersTypes"
+            class="button-light tab"
+            [class.active]="volunteerType === tp"
+            (click)="onTypeChange(tp)">
+      {{ tp }}
+    </button>
+  </div>
+</div>
+
+<div class="profile-card-wrapper" [class.empty]="doctors.length === 0">
+  <div *ngFor="let doctor of doctors;">
+
+    <app-volunteer-unapproved-card
+      [doctor]="doctor"
+      [volunteerType] = "volunteerType"
+      (approved)="onApproved(doctor)">
+    </app-volunteer-unapproved-card>
+  </div>
+
+  <app-pages *ngIf="pageCount" [pageCount]="pageCount"   [currentPage]="currentPage" (pageClick)="onPageClick($event)"></app-pages >
+
+</div>
+
+
+
+
+
+
+

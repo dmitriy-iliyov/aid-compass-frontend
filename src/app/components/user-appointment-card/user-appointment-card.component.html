@@ -1,0 +1,26 @@
+<div class="appointment-card">
+  <div class="appointment-card-left">
+    <div class="subtitle">{{ appointment?.appointment?.date }} {{ appointment?.appointment?.start }}</div>
+    <div class="button-light">{{ appointment?.appointment?.type}}</div>
+
+  </div>
+  <div class="appointment-card-middle">
+    <div class="appointment-card-row">
+      <div class="appointment-card-avatar">
+        <img [src]="appointment?.avatar_url" alt="avatar" class="appointment-card-img" />
+      </div>
+      <div>{{ appointment?.volunteer?.last_name }} {{ appointment?.volunteer?.first_name }} {{ appointment?.volunteer?.second_name }}</div>
+      <div class="subtitle">({{ appointment?.volunteer?.specializations }})</div>
+    </div>
+    <div class="appointment-card-row subtitle2">{{ appointment?.appointment?.description }}</div>
+  </div>
+
+  <div class="appointment-card-right">
+    <div class="button-wrapper">
+      <div *ngIf="(!isFinished() && !isCanceled())" class="button-dark" (click)="delete(appointment)" >&nbsp;Скасувати&nbsp;</div>
+      <div *ngIf="isFinished()" class="button-light cursor-default">Запис завершено</div>
+      <div *ngIf="isCanceled()" class="button-light cursor-default">Запис скасовано</div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.dialog-content-centered {
+  text-align: center;
+}
+
+.dialog-content-centered h2,
+.dialog-content-centered [mat-dialog-content],
+.dialog-content-centered [mat-dialog-actions] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+
+}
+
+.button-dark {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+  border: 0;
+}
+
+.button-dark:hover {
+  background-color: #555;
+}

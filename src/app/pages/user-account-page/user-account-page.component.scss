@@ -1,0 +1,63 @@
+.appointment-card-info-wrapper {
+  border: 1px solid var(--font-color);
+  background-color: var(--block-color);
+  color: var(--white-color);
+  border-radius: 2px;
+  margin-bottom: 10px;
+  align-items: stretch;
+
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: 32px;
+}
+
+.profile-card-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile-card-middle {
+  text-align: center;
+}
+.profile-card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+  text-align: right;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.appointment-card-wrapper {
+  flex-direction: column;
+}
+
+
+.tab {
+  border-radius: 2px;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+.tab.active {
+  background-color: var(--block-color);
+  color: var(--white-color);
+}
+.filter-buttons {
+  display: flex;
+  align-items: center;
+}
+.filter-label {
+  font-weight: 900;
+  font-size: 18px;
+  margin: 0 8px 0px;
+  align-items: flex-end;
+}
+.appointment-card-wrapper.empty {
+  border-top: 1px solid var(--font-color);
+}

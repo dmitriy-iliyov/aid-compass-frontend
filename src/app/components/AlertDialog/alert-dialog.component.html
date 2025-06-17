@@ -1,0 +1,20 @@
+
+<div class="dialog-content">
+  <h2>{{ data.title || 'Підтвердження' }}</h2>
+  <div class="dialog-message" [innerHTML]="data.message || 'Ви впевнені?'"></div>
+  <div class="button-wrapper" align="end">
+    <button class="button-light" (click)="onConfirm()">Добре</button>
+  </div>
+</div>
+
+<!--<h2 mat-dialog-title>{{ data.title || 'Підтвердження' }}</h2>-->
+<!--<mat-dialog-content>-->
+<!--  <div class="dialog-message" [innerHTML]="data.message || 'Ви впевнені?'"></div>-->
+<!--&lt;!&ndash;  <p>{{ data.message || 'Ви впевнені?' }}</p>&ndash;&gt;-->
+<!--</mat-dialog-content>-->
+<!--<mat-dialog-actions align="end">-->
+<!--  <button mat-button (click)="onCancel()">Ні</button>-->
+<!--  <button mat-raised-button color="primary" (click)="onConfirm()">Так</button>-->
+<!--</mat-dialog-actions>-->
+
+

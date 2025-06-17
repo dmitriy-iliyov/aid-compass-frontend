@@ -1,0 +1,44 @@
+body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+}
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  border: 1px solid var(--font-color);
+  margin-top: 20px;
+  //gap: 14px;
+}
+
+.error {
+  margin-left: 4px;
+  margin-bottom: -10px;
+}
+.button-dark {
+  margin-top: 14px;
+}
+
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.code-input {
+  width: auto;
+}
+.button-red {
+  margin-bottom: -40px;
+}

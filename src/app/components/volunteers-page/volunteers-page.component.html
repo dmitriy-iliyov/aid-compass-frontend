@@ -1,0 +1,44 @@
+<div class="search-wrapper">
+  <div class="floating-label">
+    <select [(ngModel)]="selectedSpecialization" required (change)="onSpecializationChange()" placeholder=" ">
+      <option value="100">Усі спеціальності</option>
+      <option *ngFor="let spec of specializationsList" [value]="spec">{{ spec }}</option>
+    </select>
+    <label>Пошук по спеціалізаціі</label>
+  </div>
+
+  <div class="floating-label">
+    <input [(ngModel)]="selectedName" required placeholder=" " (keyup)="onNameChange()">
+    <label>Введіть прізвище лікаря</label>
+  </div>
+</div>
+<h2>{{ volunteerTitle }}</h2>
+<div *ngIf="typesList" class="filter-buttons">
+  <button *ngFor="let tp of typesList"
+          class="button-light tab"
+          [class.active]="selectedType === tp"
+          (click)="onTypeChange(tp)">
+    {{ tp }}
+  </button>
+</div>
+<div class="profile-card-wrapper" [class.empty]="doctors.length === 0">
+  <div *ngFor="let d of doctors;">
+    <app-volunteer-profile-card
+      [doctor]="d"
+      [volunteerType] = "volunteerType"
+      (showSchedule)="onShowSchedule(d.doctor.id)">
+    </app-volunteer-profile-card>
+
+    <ng-container *ngIf="!isVolunteer() && showSchedule && selectedDoctorId === d.doctor.id">
+      <div class="schedule-wrapper"><app-schedule [doctorId]="d.doctor.id"></app-schedule></div>
+    </ng-container>
+  </div>
+  <app-pages *ngIf="pageCount" [pageCount]="pageCount"   [currentPage]="currentPage" (pageClick)="onPageClick($event)"></app-pages >
+</div>
+
+
+
+
+
+
+

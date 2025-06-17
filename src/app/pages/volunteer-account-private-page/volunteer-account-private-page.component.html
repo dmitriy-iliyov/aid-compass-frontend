@@ -1,0 +1,95 @@
+<div class="wrapper">
+<div *ngIf="isIncomplete()" class="warning">Заповнення профіля не завершено! Заповніть профіль!</div>
+
+<div *ngIf="!isLoading" class="card-wrapper">
+  <div class="profile-card-left">
+    <div *ngIf="doctor?.doctor_profile" class="profile-card-img">
+      <img [src]="doctor.avatar_url" alt="avatar" />
+    </div>
+    <div class="profile-card-left-bottom">
+      <div class="subtitle">Профіль заповнено на {{ doctor.doctor_profile.doctor.profile_progress }}%</div>
+    </div>
+  </div>
+
+  <div class="profile-card-name">
+    <div class="h2"> {{ doctor.doctor_profile.doctor.last_name }} {{ doctor.doctor_profile.doctor.first_name }} {{ doctor.doctor_profile.doctor.second_name }} <span class="subtitle">({{ doctor.doctor_profile.doctor.gender }})</span></div>
+    <div>
+      <div class="subtitle2" *ngIf="doctor.doctor_profile.doctor.type">{{ doctor.doctor_profile.doctor.type }}</div>
+      <div class="subtitle" *ngFor="let s of doctor.doctor_profile.doctor.specializations;">{{ s }}</div>
+    </div>
+    <div><div class="subtitle">Стаж</div>
+        <strong class="strong">{{ getExperience() | yearsUkr }}</strong>
+    </div>
+    <div>
+        <div class="subtitle">Спеціалізація</div>
+        <div>{{ doctor.doctor_profile.doctor.specialization_detail }}</div>
+    </div>
+    <div>
+        <div class="subtitle">Про себе</div>
+        <div>{{ doctor.doctor_profile.detail.about_myself }}</div>
+    </div>
+  </div>
+  <div class="profile-card-contact">
+    <div class="profile-card-contact-top">
+      <div class="subtitle" >Тривалість прийому {{ doctor.appointment_duration }} хв</div>
+    </div>
+    <div>
+      <div class="subtitle2">Адреса</div>
+      <div class="subtitle" > {{ doctor.doctor_profile.detail.address }} хв</div>
+    </div>
+    <div class="profile-card-contact-bottom">
+      <div class="subtitle2">{{ getPrivateContact(doctor.contacts, 'PHONE_NUMBER') }}</div>
+      <div class="subtitle">{{ getPrimaryContact(doctor.contacts, 'EMAIL') }}</div>
+      <div class="button-wrapper">
+        <div class="button-dark2" (click)="goToSchedule()">Розклад</div>
+        <div class="button-dark2" (click)="goToEdit(doctor.doctor_profile.doctor.id)">Змінити</div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="schedule-wrapper" *ngIf="showSchedule">
+    <app-schedule [doctorId]="doctor.doctor_profile.doctor.id" (deletedAppointment)="removeAppointment($event)"></app-schedule>
+</div>
+
+  <div *ngIf="isLoading">{{ isLoading }}</div>
+  <div *ngIf="isError">{{ isError }}</div>
+
+
+  <div class="filter-buttons">
+  <div class="filter-label">Записи</div>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'all'"
+    (click)="setFilter('all')">
+    Всі
+  </button>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'scheduled'"
+    (click)="setFilter('scheduled')">
+    Заплановані
+  </button>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'complete'"
+    (click)="setFilter('complete')">
+    Завершені
+  </button>
+  <button
+    class="button-light tab"
+    [class.active]="selectedFilter === 'canceled'"
+    (click)="setFilter('canceled')">
+    Скасовані
+  </button>
+</div>
+<div class="appointment-card-wrapper" [class.empty]="appointments.length === 0" *ngIf="!isLoading && !isError" >
+  <div *ngFor="let appointment of appointments;">
+    <app-volunteer-appointment-card [appointment]="appointment" (deletedAppointment)="removeAppointment($event)" (closedAppointment)="closeAppointment($event)"></app-volunteer-appointment-card>
+  </div>
+  <app-pages *ngIf="pageCount" [pageCount]="pageCount"   [currentPage]="currentPage" (pageClick)="onPageClick($event)"></app-pages >
+</div>
+</div>
+
+

@@ -1,0 +1,27 @@
+
+.profile-card-wrapper {
+  display: grid;
+  grid-gap: 8px;
+  padding-bottom: 300px;
+  transition: padding-bottom 0.3s ease;
+}
+.schedule-wrapper {
+  justify-content: center;
+  display: flex;
+}
+.search-wrapper {
+  display: flex;
+  gap: 26px;
+}
+.floating-label {
+  flex: 1;
+  min-width: 0;
+}
+
+select {
+  height: 40px;
+}
+
+h2 {
+  text-align: center;
+}

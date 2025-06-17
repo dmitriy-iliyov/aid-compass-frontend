@@ -1,0 +1,25 @@
+.pages-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.pages-wrapper a {
+  cursor: pointer;
+}
+.pages-wrapper a.active {
+  text-decoration: none;
+  color: var(--font-color);
+  font-weight: 800;
+  cursor: default;
+}
+.pages-wrapper a.active:hover {
+  color: var(--font-color);
+  font-weight: 800;
+}
+.pages-wrapper a:hover {
+  color: var(--menu-active-color);
+  font-weight: 800;
+}
+
+
+

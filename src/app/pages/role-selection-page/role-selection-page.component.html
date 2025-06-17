@@ -1,0 +1,59 @@
+<div class="wrapper">
+  <h1 style="color: #2c3e50;">Вітаємо у сервісі підтримки ВПО!</h1>
+  <div>
+    Ми створили цей додаток, щоб надати вам швидку та зручну консультаційну допомогу. Тут ви знайдете відповіді на важливі питання, корисні ресурси та підтримку, коли вона найбільше потрібна.
+  </div>
+  <div>Ми поруч – крок за кроком до нової стабільності.</div>
+  <div>Щоб ми могли краще допомогти вам, будь ласка, оберіть, ким ви є:</div>
+  <div class="button-wrapper">
+    <form #roleForm="ngForm" (ngSubmit)="submitRoleForm(roleForm)" novalidate>
+      <div class="row">
+      <div class="radio-group" >
+        <div>
+          <label class="radio-button">
+            <input type="radio" name="ROLE" [(ngModel)]="formData.role" value="CUSTOMER"
+                   (change)="errorMessages['role']=''"
+                   required />
+            <span>Користувач — якщо ви шукаєте допомогу, консультацію чи підтримку</span>
+          </label>
+
+        </div>
+        <div>
+          <label class="radio-button" >
+            <input type="radio" name="ROLE" value="VOLUNTEER"
+                   [checked]="formData.role==='DOCTOR'||formData.role==='JURIST'||formData.role==='VOLUNTEER'"
+                   (change)="formData.role='VOLUNTEER'"
+                   required />
+            <span>Волонтер — якщо ви бажаєте надавати допомогу іншим</span>
+          </label>
+
+          <div class="error" *ngIf="errorMessages['role']" style="margin-top: 20px;">
+            {{this.errorMessages['role']}}
+          </div>
+          <div class="radio-group role-volunteer" *ngIf="formData.role!=='CUSTOMER'">
+              <label class="radio-button">
+                <input type="radio" name="VOLUNTEER" [(ngModel)]="formData.role" value="DOCTOR" required
+                       (change)="errorMessages['role']=''"
+                />
+                <span>Лікар</span>
+              </label>
+
+              <label class="radio-button">
+                <input type="radio" name="VOLUNTEER" [(ngModel)]="formData.role" value="JURIST" required
+                       (change)="errorMessages['role']=''"
+                />
+                <span>Юрист</span>
+              </label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="button-light">Обрати</button>
+      </div>
+
+    </form>
+
+  </div>
+  <div>Після вибору ролі ви зможете заповнити свій профіль — це допоможе нам надати вам саме ту підтримку або можливість, яка вам потрібна.</div>
+  <div>Оберіть роль, щоб продовжити налаштування профілю.</div>
+
+</div>
