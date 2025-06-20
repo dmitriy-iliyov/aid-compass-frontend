@@ -1,11 +1,11 @@
-import { ApplicationConfig, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
-import { provideZoneChangeDetection } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
-import { RoleService } from './data/services/role.service';
-import { RoleGuard } from './data/services/roleGuard';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {APP_INITIALIZER, ApplicationConfig, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideRouter} from '@angular/router';
+import {routes} from './app.routes';
+import {RoleService} from './data/services/role.service';
+import {RoleGuard} from './data/services/roleGuard';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {CsrfInterceptor} from "./data/services/csrf.interseptor.service";
 
 export function initRole(roleService: RoleService): () => Promise<void> {
   return () => roleService.loadUserRoleOnce();
@@ -14,7 +14,9 @@ export function initRole(roleService: RoleService): () => Promise<void> {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(),
+    provideHttpClient(
+        withInterceptorsFromDi()
+    ),
     provideRouter(routes),
     { provide: LOCALE_ID, useValue: 'uk' },
     RoleService,
@@ -24,6 +26,12 @@ export const appConfig: ApplicationConfig = {
       useFactory: initRole,
       deps: [RoleService],
       multi: true,
-    }, provideAnimationsAsync(),
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CsrfInterceptor,
+      multi: true,
+    },
+    provideAnimationsAsync(),
   ],
 };

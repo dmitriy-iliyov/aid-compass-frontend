@@ -30,7 +30,7 @@
     </app-volunteer-profile-card>
 
     <ng-container *ngIf="!isVolunteer() && showSchedule && selectedDoctorId === d.doctor.id">
-      <div class="schedule-wrapper"><app-schedule [doctorId]="d.doctor.id"></app-schedule></div>
+      <div class="schedule-wrapper"><app-schedule [doctorId]="d.doctor.id" [volunteerType]="volunteerType"></app-schedule></div>
     </ng-container>
   </div>
   <app-pages *ngIf="pageCount" [pageCount]="pageCount"   [currentPage]="currentPage" (pageClick)="onPageClick($event)"></app-pages >

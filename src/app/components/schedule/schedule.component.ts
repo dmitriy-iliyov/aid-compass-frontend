@@ -22,6 +22,7 @@ export class ScheduleComponent {
 ) {}
 
   @Input() doctorId!: string;
+  @Input() volunteerType!: string;
   @Output() deletedAppointment = new EventEmitter<number>();
   removeAppointment(id: number){
     this.deletedAppointment.emit(id);

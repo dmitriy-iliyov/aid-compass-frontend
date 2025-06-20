@@ -37,7 +37,7 @@ export class VolunteersPageComponent {
   }
 
 
-  @Input() volunteerType?:string;
+  @Input() volunteerType!: string;
   @Input() volunteerTitle?:string;
 
   @Input() doctors: DoctorCardPublicDto[] = [];

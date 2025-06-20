@@ -7,6 +7,7 @@ import {RoleService} from '../../data/services/role.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DoctorsService} from '../../data/services/doctors.service';
 import {YearsUkrPipe} from '../../modules/years-ukr.pipe';
+import {AlertDialogComponent} from "../AlertDialog/alert-dialog.component";
 
 @Component({
   selector: 'app-volunteer-profile-card',
@@ -38,7 +39,23 @@ export class VolunteerProfileCardComponent {
       this.showSchedule.emit(doctorId);
   }
   goToAppointment(doctorId?: string, date?: string, time?: string) {
-    console.log('========'+this.volunteerType);
+    if (!this.roleService.isCustomer()) {
+      const dialogRef2 = this.dialog.open(AlertDialogComponent, {
+        width: '400px',
+        panelClass: 'centered-dialog',
+        disableClose: false,
+        data: {
+          title: 'Запис на консультацію до волонтера:',
+          message:
+              'Запис на консультацію до волонтера можливий лише для зареєстрованих користувачів. Зареєструйтесь, будь ласка!',
+        }
+      });
+      dialogRef2.afterClosed().subscribe
+          (result=> {
+            this.router.navigate(['/login']);
+          })
+          return;
+    }
     console.log({ id:doctorId, d: date, t: time });
     this.router.navigate([`/${this.volunteerType}-appointment`], {
       queryParams: { id:doctorId, d: date, t: time }

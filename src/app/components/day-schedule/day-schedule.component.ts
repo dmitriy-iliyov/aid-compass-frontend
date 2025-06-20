@@ -34,6 +34,7 @@ export class DayScheduleComponent {
   }
 
   @Input() doctorId!: string;
+  @Input() volunteerType!: string;
   @Input() day!: string;
   @Output() deletedAppointment = new EventEmitter<number>();
 
@@ -277,7 +278,7 @@ export class DayScheduleComponent {
       }
     }
     else {
-        this.router.navigate(['/doctor-appointment'], {queryParams: {id: this.doctorId, d: day, t: time}});
+        this.router.navigate(['/'+this.volunteerType+'-appointment'], {queryParams: {id: this.doctorId, d: day, t: time}});
     }
   }
 
@@ -290,7 +291,7 @@ export class DayScheduleComponent {
       this.showTm = true;
     }
 
-    this.router.navigate(['/doctor-appointment'], {queryParams: {id: this.doctorId, d: day, t: time}});
+    this.router.navigate(['/'+this.volunteerType+'-appointment'], {queryParams: {id: this.doctorId, d: day, t: time}});
   }
   onSelectTimeNoUser() {
     const dialogRef2 = this.dialog.open(AlertDialogComponent, {
