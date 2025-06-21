@@ -6,6 +6,9 @@
   </div>
   <div class="appointment-card-middle">
     <div class="appointment-card-row">
+        <div class="appointment-card-avatar">
+            <img [src]="appointment?.avatar_url" alt="avatar" class="appointment-card-img" />
+        </div>
       <div>{{ appointment?.customer?.last_name }}</div>
       <div>{{ appointment?.customer?.first_name }}</div>
       <div class="subtitle">({{ appointment?.customer?.birthday_date }}, {{ appointment?.customer?.gender }})</div>

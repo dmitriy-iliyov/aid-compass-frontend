@@ -13,6 +13,7 @@ export interface AppointmentForDoctorPrivateDto {
     "topic": string,
     "description": string
   },
+  "avatar_url": string,
   "customer": {
     "id": string,
     "last_name": string,

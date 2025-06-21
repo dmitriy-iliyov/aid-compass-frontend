@@ -23,7 +23,7 @@ export class AppointmentService {
       description: data.description,
     }
     console.log(body)
-    return this.http.post<AppointmentForDoctorPrivateDto[]>(`${this.basePrivateApiUrl}/me`, body, {withCredentials :true})
+    return this.http.post<AppointmentForDoctorPrivateDto[]>(`${this.basePrivateApiUrl}/me/schedule`, body, {withCredentials :true})
   }
 
   getDoctorAppointments(): Observable<AppointmentForDoctorPrivateDto[]> {
@@ -62,7 +62,7 @@ export class AppointmentService {
   }
 
   delete(id: number | undefined) {
-    return this.http.delete(`${this.basePrivateApiUrl}/me/${id}`, {withCredentials :true, observe: 'response' });
+    return this.http.patch(`${this.basePrivateApiUrl}/me/${id}/cancel`, {withCredentials :true, observe: 'response' });
   }
   close(id: number | undefined, reason:string) {
     return this.http.patch(`${this.basePrivateApiUrl}/me/${id}/complete`, {'reason':reason}, {withCredentials :true, observe: 'response' });
