@@ -92,7 +92,7 @@ export class JuristsPageComponent {
     this.nameChange()
   }
   nameChange(){
-    this.juristsService.getJuristsByName(this.selectedName, this.currentPage).subscribe
+    this.juristsService.getJuristsByName(this.selectedName, (this.selectedType === 'Всі' ? '' : this.selectedType), this.currentPage).subscribe
     ({
       next:(res)=>{
         this.doctors = res.data;

@@ -41,7 +41,7 @@ export class ScheduleComponent {
     if (this.selectedDay && this.isSameDate(this.selectedDay, day)) {
       this.showDaySchedule = false;
       this.selectedDay = null;
-    } else {
+    } else if (this.isFuture(day) && (this.isAvailable(day) || this.isBusy(day) || this.isVolunteer())) {
       this.selectedDay = day;
       this.showDaySchedule = true;
     }

@@ -10,7 +10,7 @@
         'selected-day': isSameDate(selectedDay, day),
         'available-day': isFuture(day) && isAvailable(day),
         'busy-day': isBusy(day),
-        'allowed-day': isFuture(day),
+        'allowed-day': (isFuture(day) && (isAvailable(day) || isBusy(day) || isVolunteer())),
         }"
       >
         <div class="date">{{ day | date: 'dd' : undefined : 'uk' }}</div>

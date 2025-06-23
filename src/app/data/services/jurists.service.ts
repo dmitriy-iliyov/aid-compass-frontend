@@ -101,10 +101,12 @@ export class JuristsService {
     );
   }
 
-  getJuristsByName(str: string,page:number): Observable<PageDto<DoctorCardPublicDto>> {
+  getJuristsByName(str: string, type: string, page:number): Observable<PageDto<DoctorCardPublicDto>> {
     if (str === '') return this.getJurists();
+    if (type!=='')
+      type='&type='+type
 
-    return this.http.get<PageDto<any>>(`${this.baseApiUrl}/cards/names?last_name=${str}&page=${page}&size=10`).pipe(
+    return this.http.get<PageDto<any>>(`${this.baseApiUrl}/cards/names?last_name=${str}&page=${page}&size=10${type}`).pipe(
       map(response => {
         const adapted = response.data
           .map(profile => this.adaptProfileCard(profile))

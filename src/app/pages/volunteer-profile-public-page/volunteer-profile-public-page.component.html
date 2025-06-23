@@ -39,7 +39,7 @@
          </div>
     </div>
     <div class="schedule-wrapper" *ngIf="showSchedule">
-        <app-schedule [doctorId]="doctor.doctor_profile.doctor.id"></app-schedule>
+        <app-schedule [doctorId]="doctor.doctor_profile.doctor.id" [volunteerType] = "volunteerType"></app-schedule>
     </div>
     <div *ngIf="isLoading">{{ status }}</div>
 </div>
