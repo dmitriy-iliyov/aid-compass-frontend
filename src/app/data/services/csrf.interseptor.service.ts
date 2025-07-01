@@ -21,10 +21,10 @@ export class CsrfInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
 
-        if (req.url.endsWith('/csrf') || req.url.includes("/login") || req.url.includes("/api/v1/contact") ) {
+        if (req.url.endsWith('/csrf') || req.url.includes("/login") || req.url.includes("/api/v1/contact") || req.url.includes("/api/users")
+            || req.url.includes("/api/confirmations/linked-email") || req.url.includes("/api/confirmations/linked-email/request")) {
             return next.handle(req);
         }
-
         console.log('[CsrfInterceptor] Intercepted:', req.url);
 
         return this.csrfService.loadToken().pipe(
