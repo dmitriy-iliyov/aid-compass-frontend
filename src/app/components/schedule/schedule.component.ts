@@ -6,6 +6,8 @@ import {DatePipe} from '@angular/common';
 import {ScheduleService} from '../../data/services/schedule.service';
 import {RoleService} from '../../data/services/role.service';
 import {getError} from '../../modules/utils';
+import {formatDate} from "../../modules/utils";
+
 
 
 @Component({
@@ -28,7 +30,13 @@ export class ScheduleComponent {
     this.deletedAppointment.emit(id);
   }
 
+setAvailable(event:[day: Date, status:string]):void {
+    const [day, status] = event;
 
+    const formatted = formatDate(day);
+    if (this.isVolunteer())
+      this.volunteerDays[formatted] = status;
+}
   ngOnChanges() {
     this.generateSchedule();
   }
@@ -47,7 +55,19 @@ export class ScheduleComponent {
     }
     console.log(this.selectedDay);
   }
+  isAvailable(day: Date): boolean {
+    const formatted = formatDate(day);
+    return ((!this.isVolunteer() && this.availableDays.includes(formatted)) || (this.isVolunteer() && this.volunteerDays[formatted] == '1'));
+  }
 
+
+  isBusy(day: Date): boolean {
+    const formatted = formatDate(day);
+    return (this.isVolunteer() && this.availableDays.includes(formatted) && this.volunteerDays[formatted] == '2');
+  }
+  isFuture(date: Date) {
+    return (new Date(date) > this.today);
+  }
   isSameDate(d1: Date | null, d2: Date): boolean {
     if (!d1) return false;
     return d1.toDateString() === d2.toDateString();
@@ -128,27 +148,10 @@ export class ScheduleComponent {
     return new Date(date.setDate(diff));
   }
 
-  isAvailable(day: Date): boolean {
-    const formatted = this.formatDate(day);
-    return ((!this.isVolunteer() && this.availableDays.includes(formatted)) || (this.isVolunteer() && this.volunteerDays[formatted] == '1'));
-  }
 
-  isBusy(day: Date): boolean {
-    const formatted = this.formatDate(day);
-    return (this.isVolunteer() && this.availableDays.includes(formatted) && this.volunteerDays[formatted] == '2');
-  }
-  isFuture(date: Date) {
-    return (new Date(date) > this.today);
-  }
   isVolunteer() {
     return this.roleService.isVolunteer();
   }
-  formatDate(date: Date | null): string {
-    if (!date) return '';
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // месяц от 0
-    const day = ('0' + date.getDate()).slice(-2);
-    return `${year}-${month}-${day}`;
-  }
+
 
 }

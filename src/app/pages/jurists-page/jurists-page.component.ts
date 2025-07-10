@@ -92,6 +92,7 @@ export class JuristsPageComponent {
     this.nameChange()
   }
   nameChange(){
+    console.log(this.selectedType==='Всі'?'':this.selectedType);
     this.juristsService.getJuristsByName(this.selectedName, (this.selectedType === 'Всі' ? '' : this.selectedType), this.currentPage).subscribe
     ({
       next:(res)=>{
@@ -121,7 +122,11 @@ export class JuristsPageComponent {
     this.isError = '';
     this.selectedType = filter;
     this.currentPage = 0;
-    this.getJurists();
+    if (this.selectedName === '') {
+      this.getJurists();
+    } else {
+      this.nameChange();
+    }
   }
   getJurists(){
     this.juristsService.getJuristsByFilter((this.selectedType === 'Всі' ? '' : this.selectedType), this.selectedSpecialization, this.currentPage).subscribe

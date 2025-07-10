@@ -17,13 +17,14 @@
         <div class="month">{{ day | date: 'MMMM' : undefined : 'uk' }}</div>
       </div>
     </div>
-    <ng-container *ngIf="showDaySchedule && isDayInWeek(week, selectedDay)">
+    <ng-container *ngIf="showDaySchedule && selectedDay != null &&  isDayInWeek(week, selectedDay)">
       <div class="schedule-week-details">
         <app-day-schedule
-          [day]="formatDate(selectedDay)"
+          [day]="selectedDay"
           [doctorId]="doctorId"
           [volunteerType]="volunteerType"
           (deletedAppointment)="removeAppointment($event)"
+          (setAvailableDay)="setAvailable($event)"
         ></app-day-schedule>
       </div>
     </ng-container>

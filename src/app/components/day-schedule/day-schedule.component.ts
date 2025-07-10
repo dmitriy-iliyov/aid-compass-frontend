@@ -12,6 +12,7 @@ import {AppointmentDialogComponent} from '../appointment-dialog/appointment-dial
 import {AppointmentForDoctorPrivateDto} from '../../data/interfaces/AppointmentForDoctorPrivate.dto';
 import {AlertDialogComponent} from '../AlertDialog/alert-dialog.component';
 import {getError} from '../../modules/utils';
+import {formatDate} from '../../modules/utils'
 
 
 @Component({
@@ -35,7 +36,7 @@ export class DayScheduleComponent {
 
   @Input() doctorId!: string;
   @Input() volunteerType!: string;
-  @Input() day!: string;
+  @Input() day!: Date;
   @Output() deletedAppointment = new EventEmitter<number>();
 
   ngOnChanges() {
@@ -48,7 +49,7 @@ export class DayScheduleComponent {
   volunteerTimes: { [key: string]: { id: number, status: string } } = {};
   allTimes: string[] = [];
   selectedTm: string | null = null;
-  showTm = false;
+  //showTm = false;
 
   isLoading = true;
   status: string = 'Завантаження ...';
@@ -58,7 +59,7 @@ export class DayScheduleComponent {
 
     if (this.isVolunteer()) {
       this.title = 'Ваші години роботи';
-      this.scheduleService.getVolunteerTimes(this.day).subscribe
+      this.scheduleService.getVolunteerTimes(formatDate(this.day)).subscribe
       ({
         next:(data)=>{// @ts-ignore
           this.volunteerTimes = data;
@@ -74,7 +75,7 @@ export class DayScheduleComponent {
       if (this.isNoUser() || this.isAdmin()) {
         this.title = 'Часи роботи волонтера';
       }
-      this.scheduleService.getAvailableTimes(this.doctorId, this.day).subscribe
+      this.scheduleService.getAvailableTimes(this.doctorId, formatDate(this.day)).subscribe
       ({
         next:(data)=>{// @ts-ignore
           this.availableTimes = data
@@ -126,14 +127,14 @@ export class DayScheduleComponent {
 
   appointment?: AppointmentForDoctorPrivateDto;
 
-
-  onSelectTimeVolunteer(day: string, time: string, id: number, element: EventTarget | null) {
+@Output() setAvailableDay = new EventEmitter<[Date, string]>();
+  onSelectTimeVolunteer(day: Date, time: string, id: number, element: EventTarget | null) {
     if (this.selectedTm && this.isSameTm(this.selectedTm, time)) {
-      this.showTm = false;
+      //this.showTm = false;
       this.selectedTm = null;
     } else {
-      this.selectedTm = day;
-      this.showTm = true;
+      this.selectedTm = time;
+      //this.showTm = true;
     }
 
 
@@ -215,7 +216,8 @@ export class DayScheduleComponent {
 
 
 
-      } else if (this.isAvailable(time)) {
+      }
+      else if (this.isAvailable(time)) {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {
           width: '400px',
           panelClass: 'centered-dialog',
@@ -237,6 +239,16 @@ export class DayScheduleComponent {
                   this.volunteerTimes[time]['status'] = '0';
                   // @ts-ignore
                   this.volunteerTimes[time]['id'] = null;
+                  let clean = true;
+                  for (const [tm, value] of Object.entries(this.volunteerTimes)) {
+                    if (this.isAvailable(tm) || this.isBusy(tm)) {
+                      clean = false;
+                      break;
+                    }
+                  }
+                  if (clean) {
+                    this.setAvailableDay.emit([day, '0'])
+                  }
                 }
               },
               error: () => {
@@ -245,7 +257,8 @@ export class DayScheduleComponent {
             });
           }
           });
-      } else {
+      }
+      else {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {
           width: '400px',
           panelClass: 'centered-dialog',
@@ -258,7 +271,7 @@ export class DayScheduleComponent {
         dialogRef.afterClosed().subscribe
         (result => {
           if (result === true) {
-            this.scheduleService.setVolunteerTime(day, time).subscribe
+            this.scheduleService.setVolunteerTime(formatDate(day), time).subscribe
             ({
               next: (result:any) => {
                 this.volunteerTimes[time]['status'] = '1';
@@ -268,6 +281,7 @@ export class DayScheduleComponent {
                 if (htmlElement) {
                   htmlElement.classList.add('available-tm');
                 }
+                this.setAvailableDay.emit([day,'1'])
               },
               error: () => {
                 alert('Час додати не вдалося. Спробуйте пізніше')
@@ -282,13 +296,13 @@ export class DayScheduleComponent {
     }
   }
 
-  onSelectTime(day: string, time: string) {
+  onSelectTime(day: Date, time: string) {
     if (this.selectedTm && this.isSameTm(this.selectedTm, time)) {
-      this.showTm = false;
+      //this.showTm = false;
       this.selectedTm = null;
     } else {
-      this.selectedTm = day;
-      this.showTm = true;
+      this.selectedTm = time;
+      //this.showTm = true;
     }
 
     this.router.navigate(['/'+this.volunteerType+'-appointment'], {queryParams: {id: this.doctorId, d: day, t: time}});

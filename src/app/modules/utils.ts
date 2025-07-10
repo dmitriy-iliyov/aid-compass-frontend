@@ -53,6 +53,13 @@ export function getError(text: string, err: any): string {
   return res.trim();
 }
 
+export function formatDate(date: Date | null): string {
+  if (!date) return '';
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2); // месяц от 0
+  const day = ('0' + date.getDate()).slice(-2);
+  return `${year}-${month}-${day}`;
+}
 
 
 

@@ -2,7 +2,7 @@
   <div class="profile-card-info2">
     <div class="profile-card-info">
       <div class="">
-        <img [src]="doctor?.avatar_url" alt="avatar" class="profile-card-img" />
+        <img [src]="doctor?.avatar_url" alt="avatar" class="profile-card-img" loading="lazy"/>
       </div>
       <div class="profile-card-name">
         <div class="h2"> {{ doctor?.doctor?.last_name }} {{ doctor?.doctor?.first_name }} {{ doctor?.doctor?.second_name }} <span class="subtitle">({{ doctor?.doctor?.gender }})</span></div>
