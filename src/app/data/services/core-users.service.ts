@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {CoreUser} from '../interfaces/CoreUser.interface';
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import {CoreUser} from '../interfaces/CoreUser.interface';
 })
 export class CoreUsersService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/users';
+  baseApiUrl = `${environment.apiUrl}/users`;
   constructor() {
 
   }

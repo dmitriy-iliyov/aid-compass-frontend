@@ -7,17 +7,17 @@ import {VolunteerDetailDto} from '../interfaces/VolunteerDetail.dto';
 import {DoctorProfilePrivateDto} from '../interfaces/DoctorProfilePrivate.dto';
 import {PageDto} from '../interfaces/Page.dto';
 import {DoctorProfilePrivateAdminDto} from '../interfaces/DoctorProfilePrivateAdmin.dto';
-
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorsService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/aggregator/doctors';
-  basePrivateApiUrl = 'https://localhost:8443/api/v1/doctors';
-  baseAdminApiUrl = 'https://localhost:8443/api/admin/v1/doctors';
-  baseAdminGetApiUrl = 'https://localhost:8443/api/admin/aggregator/doctors/unapproved';
+  baseApiUrl = `${environment.apiUrl}/aggregator/doctors`;
+  basePrivateApiUrl = `${environment.apiUrl}/v1/doctors`;
+  baseAdminApiUrl = `${environment.apiUrl}/admin/v1/doctors`;
+  baseAdminGetApiUrl = `${environment.apiUrl}/admin/aggregator/doctors/unapproved`;
 
   constructor() { }
 

@@ -1,5 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from "../../../environments/environment";
 
 
 
@@ -8,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AvatarService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/v1/avatars';
+  baseApiUrl = `${environment.apiUrl}/v1/avatars`;
   constructor() {}
 
   save(id: string, file: File) {

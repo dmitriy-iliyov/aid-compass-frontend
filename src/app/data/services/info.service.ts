@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class InfoService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/info/v1';
+  baseApiUrl = `${environment.apiUrl}/info/v1`;
   constructor() { }
 
   getDoctorSpecialisations():Observable<string[]> {

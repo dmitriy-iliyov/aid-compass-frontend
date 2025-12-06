@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import {map, Observable} from 'rxjs';
 })
 export class MessageService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/confirmations';
+  baseApiUrl = `${environment.apiUrl}/confirmations`;
   constructor() {
 
   }

@@ -3,14 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {catchError, from, map, Observable, of, switchMap, tap, throwError} from 'rxjs';
 import {RoleService} from './role.service';
 import {ActivatedRoute} from '@angular/router';
-
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api';
+  baseApiUrl = `${environment.apiUrl}`;
   constructor(
     private roleService: RoleService,
   ) {}

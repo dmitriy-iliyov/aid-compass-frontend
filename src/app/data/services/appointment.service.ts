@@ -4,14 +4,15 @@ import {map, Observable} from 'rxjs';
 import {AppointmentForDoctorPrivateDto} from '../interfaces/AppointmentForDoctorPrivate.dto';
 import {UserAppointmentPrivateDto} from '../interfaces/UserAppointmentPrivate.dto';
 import {PageDto} from '../interfaces/Page.dto'
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/aggregator/appointments';
-  basePrivateApiUrl = 'https://localhost:8443/api/v1/appointments'
+  baseApiUrl = `${environment.apiUrl}/aggregator/appointments`;
+  basePrivateApiUrl = `${environment.apiUrl}/v1/appointments`
   constructor() { }
 
   create(data: any) {

@@ -8,16 +8,17 @@ import {Jurist} from '../interfaces/Jurist.interface';
 import {VolunteerDetailDto} from '../interfaces/VolunteerDetail.dto';
 import {PageDto} from '../interfaces/Page.dto';
 import {DoctorProfilePrivateAdminDto} from '../interfaces/DoctorProfilePrivateAdmin.dto';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class JuristsService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/aggregator/jurists';
-  basePrivateApiUrl= 'https://localhost:8443/api/v1/jurists';
-  baseAdminApiUrl = 'https://localhost:8443/api/admin/v1/jurists';
-  baseAdminGetApiUrl = 'https://localhost:8443/api/admin/aggregator/jurists/unapproved';
+  baseApiUrl = `${environment.apiUrl}/aggregator/jurists`;
+  basePrivateApiUrl= `${environment.apiUrl}/v1/jurists`;
+  baseAdminApiUrl = `${environment.apiUrl}/admin/v1/jurists`;
+  baseAdminGetApiUrl = `${environment.apiUrl}/admin/aggregator/jurists/unapproved`;
 
   constructor() { }
 

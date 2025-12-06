@@ -2,14 +2,15 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {User} from '../interfaces/User.interface';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   http = inject(HttpClient);
-  baseApiUrl = 'https://localhost:8443/api/v1/customers';
-  baseAggregatorApiUrl = 'https://localhost:8443/api/aggregator/customers';
+  baseApiUrl = `${environment.apiUrl}/v1/customers`;
+  baseAggregatorApiUrl = `${environment.apiUrl}/aggregator/customers`;
   constructor() {
 
   }

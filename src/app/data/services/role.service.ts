@@ -3,10 +3,11 @@ import {BehaviorSubject, from, Observable, of, switchMap, throwError} from 'rxjs
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
+import {environment} from "../../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class RoleService {
-  private baseApiUrl = 'https://localhost:8443/api';
+  private baseApiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +25,7 @@ export class RoleService {
   async loadUserRoleOnce(): Promise<void> {
     try {
       const response = await firstValueFrom(
-        this.http.get<{ authority: string }>('https://localhost:8443/api/auth/me', {
+        this.http.get<{ authority: string }>(`${environment.apiUrl}/auth/me`, {
           withCredentials: true,
         }).pipe(
           tap(res => {

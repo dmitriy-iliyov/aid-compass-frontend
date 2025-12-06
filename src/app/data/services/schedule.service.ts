@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -8,9 +9,9 @@ import {Observable} from 'rxjs';
 })
 export class ScheduleService {
   http = inject(HttpClient);
-  baseTimetableApiUrl = 'https://localhost:8443/api/v1/timetable';
-  baseDaysApiUrl = 'https://localhost:8443/api/v1/days';
-  baseIntervalsApiUrl = 'https://localhost:8443/api/v1/intervals';
+  baseTimetableApiUrl = `${environment.apiUrl}/v1/timetable`;
+  baseDaysApiUrl = `${environment.apiUrl}/v1/days`;
+  baseIntervalsApiUrl = `${environment.apiUrl}/v1/intervals`;
   constructor() { }
 
   getAvailableDays(doctorId:string): Observable<String[]> {
