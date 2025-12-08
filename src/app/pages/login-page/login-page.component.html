@@ -30,8 +30,8 @@
       </div>
 
       <button type="submit" class="button-dark">Увійти</button>
-    <div><a href="/registration">Зареєструватись</a></div>
-    <div><a href="/recovery-password">Забули пароль?</a></div>
-
+    <div><a routerLink="/registration" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Зарееструватися</a></div>
+    <div><a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Увійти</a></div>
+      
   </form>
 </div>
