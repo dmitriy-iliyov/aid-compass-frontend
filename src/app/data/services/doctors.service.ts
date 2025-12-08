@@ -43,7 +43,7 @@ export class DoctorsService {
   getUnapprovedDoctorsByName(str:string, page:number):Observable<PageDto<DoctorProfilePrivateAdminDto>> {
     if (str == '')
       return this.getDoctorsUnapproved(page);
-    return this.http.get<PageDto<DoctorProfilePrivateAdminDto>>(`${this.baseAdminGetApiUrl}/cards/names?last_name=${str}&page=${page}`, {withCredentials:true})
+    return this.http.get<PageDto<DoctorProfilePrivateAdminDto>>(`${this.baseAdminGetApiUrl}/cards/names?lastName=${str}&page=${page}`, {withCredentials:true})
       .pipe(
         map(response => ({
           ...response,
@@ -69,7 +69,7 @@ export class DoctorsService {
   getDoctorsByName(str:string, page:number):Observable<PageDto<DoctorCardPublicDto>> {
     if (str == '')
       return this.getDoctors(page);
-    return this.http.get<PageDto<DoctorCardPublicDto>>(`${this.baseApiUrl}/cards/names?last_name=${str}&page=${page}`)
+    return this.http.get<PageDto<DoctorCardPublicDto>>(`${this.baseApiUrl}/cards/names?lastName=${str}&page=${page}`)
       .pipe(
         map(response => ({
           ...response,

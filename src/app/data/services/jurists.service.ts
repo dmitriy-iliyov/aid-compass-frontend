@@ -55,7 +55,7 @@ export class JuristsService {
   getUnapprovedJuristsByName(str:string, page:number):Observable<PageDto<DoctorProfilePrivateAdminDto>> {
     if (str == '')
       return this.getJuristsUnapproved(page);
-    return this.http.get<PageDto<any>>(`${this.baseAdminGetApiUrl}/cards/names?last_name=${str}&page=${page}&size=10`, {withCredentials:true})
+    return this.http.get<PageDto<any>>(`${this.baseAdminGetApiUrl}/cards/names?lastName=${str}&page=${page}&size=10`, {withCredentials:true})
       .pipe(
         map(response => {
           const adapted = response.data
@@ -107,7 +107,7 @@ export class JuristsService {
     if (type!=='')
       type='&type='+type
 
-    return this.http.get<PageDto<any>>(`${this.baseApiUrl}/cards/names?last_name=${str}&page=${page}&size=10${type}`).pipe(
+    return this.http.get<PageDto<any>>(`${this.baseApiUrl}/cards/names?lastName=${str}&page=${page}&size=10${type}`).pipe(
       map(response => {
         const adapted = response.data
           .map(profile => this.adaptProfileCard(profile))
