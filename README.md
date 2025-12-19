@@ -9,8 +9,7 @@ The frontend is built as a SPA using Angular and communicates with the backend v
 It provides a user-friendly interface for authentication, schedule management, and appointment booking.
 
 Project components:
-- backend – https://github.com/dmitriy-iliyov/aid-compass-backend  
-- task scheduler service – https://github.com/dmitriy-iliyov/schedule-tasks-service  
+- core backend – https://github.com/dmitriy-iliyov/aid-compass-backend  
 
 ## Key Features
 
