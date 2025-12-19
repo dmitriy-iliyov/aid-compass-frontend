@@ -11,7 +11,7 @@ It provides a user-friendly interface for authentication, schedule management, a
 Project components:
 - core backend – https://github.com/dmitriy-iliyov/aid-compass-backend  
 
-## Key Features
+## Key features
 
 - user and specialist authentication;
 - role-based UI behavior;
